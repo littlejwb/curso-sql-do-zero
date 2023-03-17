@@ -1,0 +1,36 @@
+-- Seja o seguinte problema:
+-- Registrar na tabela auditoria SEMPRE que um novo autor for cadastrado.
+-- Guardar a data!
+
+-- Criando a tabela:
+create table auditoria (autor_id int, data date, acao text);
+
+-- Criando a trigger de auditoria:
+create trigger auditoria after insert on autor
+begin
+    insert into auditoria(autor_id, data, acao)
+    values (new.id, datetime('now'), 'Autor inserido');
+end;
+
+-- Inserindo pra testar:
+insert into autor(id, nome) values (10, 'Ana');
+
+-- Conferindo na tabela auditoria.
+select * from auditoria;
+
+-- Criando uma trigger para quando o autor for excluído.
+create trigger auditoria2 after delete on autor
+begin
+    insert into auditoria(autor_id, data, acao) 
+    values (old.id, datetime('now'), 'Autor excluído');
+end;
+
+-- Testando
+delete from autor where id = 10;
+
+-- Conferindo na tabela auditoria.
+select * from auditoria;
+
+-- Excluindo trigger
+drop trigger auditoria;
+drop trigger auditoria2;

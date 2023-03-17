@@ -1,0 +1,85 @@
+-- Crie uma tabela de auditoria contendo os campos editora_id, data e observação.
+create table auditoria (editora_id int, data date, obs text);
+
+--Crie uma trigger para que toda vez que seja inserido um novo registro na tabela editora
+--seja gravado um registro na tabela auditoria com a informação “Registro inserido” 
+create trigger auditoria after insert on editora
+begin
+    insert into auditoria (editora_id, data, obs)
+    values (new.id, datetime('now'), 'Registro inserido');
+end;
+
+--Crie uma trigger para que toda vez que seja excluído um registro na tabela editora
+--seja gravado um registro na tabela auditoria com a informação “Registro excluído” 
+create trigger auditoria2 after delete on editora
+begin
+    insert into auditoria(editora_id, data, obs)
+    values (old.id, datetime('now'), 'Registro excluído');
+end;
+
+--Faça um join na tabela de livros com autores mostrando 
+--o título do livro e do autor. 
+select titulo, nome
+from autor inner join livro
+on autor.id = livro.autor_id;
+
+--outra forma
+select l.titulo, a.nome
+from livro l, autor a
+where a.id = l.autor_id;
+
+-- Faça um join na tabela de livros com autores mostrando o título do livro e do autor usando agora
+--um LEFT OUTER JOIN para mostrar inclusive os livros que não tenham autor definido
+select titulo, nome
+from livro left outer join autor
+on autor.id = livro.autor_id;
+
+--Escreva um bloco de transação que exclua o livro de código 1 e insira um novo livro de código 50. 
+--Mas dê um rollback na transação. 
+begin transaction;
+delete from livro where id = 1;
+insert into livro(id, titulo) values (50, 'Teste');
+rollback;
+
+--Escreva um bloco de transação que exclua o livro de código 3 e insira um novo livro de código 3.
+--Feche a transação com Commit
+begin transaction;
+delete from livro where id = 3;
+insert into livro(id, titulo) values (3, 'Crepúsculo');
+commit;
+
+--Fazer um select no Banco e retornar os seguintes campos:
+--Nome do autor em letras maiúsculas, nome do estilo em letras minúsculas
+--As 10 primeiras letras do nome do livro, Valor do Livro, Valor do Livro com desconto de 7%
+--Atenção: Trata-se de UM ÚNICO COMANDO SELECT para retornar todos os campos acima. 
+select upper(a.nome), lower(e.nome), substr(l.titulo, 1, 10),
+l.precovenda as 'Valor do livro', l.precovenda * 0.93 as 'Desconto de 7%'
+from livro l, autor a, estilo e
+where a.id = l.autor_id
+and e.id = l.estilo_id;
+
+-- Faça um select trazendo o nome do livro, código do estilo, código do autor e código da editora. Caso
+--algum campo desse esteja NULL mostre a mensagem SEM CADASTRO. 
+select titulo,
+    ifnull(estilo_id, 'Sem cadastro'),
+    ifnull(autor_id, 'Sem cadastro'),
+    ifnull(editora_id, 'Sem cadastro')
+from livro; 
+
+-- Mostre o nome das 6 primeiras editoras em ordem alfabética e em letras maiúsculas.
+select upper(nome) from editora 
+order by nome 
+limit 6;
+
+--Faça um select mostrando o nome do livro e o tamanho em caracteres do nome.
+select titulo, length(titulo) from livro;
+
+-- Exiba a data atual 
+select date('now');
+
+--Exiba a versão do SQLite
+select sqlite_version();
+
+--Exiba o nome das editoras substituindo a letra a por X 
+select replace(nome, 'a', 'X') 
+from editora;

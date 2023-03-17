@@ -1,0 +1,204 @@
+-- Crie uma tabela com o nome de alunos. Deverá conter o campo 
+--código (inteiro), nome, telefone e cidade (texto): 
+create table alunos (
+codigo int,
+nome text,
+telefone text,
+cidade text);
+
+-- Crie a tabela funcionários contendo os campos código, nome, 
+--endereço, telefone, cidade, estado, cep, rg, cpf e salário. 
+--Coloque os tipos de dados necessários.
+create table funcionarios (
+codigo int,
+nome text,
+endereco text,
+telefone text,
+cidade text,
+estado text,
+cep text,
+rg text,
+cpf text,
+salario number);
+
+--Agora iremos trabalhar com o comando insert para inserir um 
+--novo registro ao banco de dados. Apenas para você lembrar o 
+--funcionamento dele iremos inserir um registro na tabela alunos: 
+insert into alunos (codigo, nome, telefone, cidade)
+values (1, 'Ana', '9999-9999', 'Florianópolis');
+
+--Insira um novo registro na tabela alunos com os seus dados. 
+insert into alunos (codigo, nome, telefone, cidade)
+values (2, 'Juliana', '8888-8888', 'Garopaba');
+
+--Precisamos agora verificar se o registro foi inserido 
+--corretamente. Então precisamos selecionar todos os dados da 
+--tabela alunos. Use o comando select desse jeito: 
+--select * from alunos; (lembre-se que o * aqui nesse caso 
+--significa todos os campos, ou seja, irá mostrar nome, endereço, código, etc).
+select * from alunos;
+
+-- Insira na tabela alunos o aluno José Buscapé.
+insert into alunos (codigo, nome, telefone, cidade)
+values (3, 'José Buscapé', '8888-7777', 'São Paulo');
+
+--Selecione o conteúdo da tabela e veja se foi inserido corretamente.
+select * from alunos;
+
+--Agora você vai aprender um novo recurso do comando select. 
+--Você pode escolher os CAMPOS que deseja que sejam exibidos. 
+--Por exemplo, se eu quiser exibir somente o código e o nome devo 
+--usar o comando assim: select codigo,nome from alunos; - Faça isso agora!
+select codigo, nome 
+from alunos;
+
+--Selecione somente o nome e telefone dos alunos.
+select nome, telefone 
+from alunos;
+
+--Selecione o nome e a cidade dos alunos
+select nome, cidade 
+from alunos;
+
+--Selecione somente o código e o telefone dos alunos
+select codigo, telefone 
+from alunos;
+
+--Insira 4 novos alunos;
+insert into alunos (codigo, nome, telefone, cidade)
+values (4, 'Maria', '9999-5555', 'Rio de Janeiro');
+insert into alunos (codigo, nome, telefone, cidade)
+values (5, 'Pedro', '9999-4444', 'Curitiba');
+insert into alunos (codigo, nome, telefone, cidade)
+values (6, 'Valter', '9999-1111', 'Garopaba');
+insert into alunos (codigo, nome, telefone, cidade)
+values (7, 'Raphael', '9999-0000', 'Rio de Janeiro');
+
+--Selecione todos os campos da tabela alunos
+select * from alunos;
+
+--Selecione da tabela alunos os seguintes campos 
+--(nessa ordem): cidade, código, nome. Veja 
+--que você pode exibir os dados na ordem que quiser.
+select cidade, codigo, nome
+from alunos;
+
+--Insira mais um aluno na tabela alunos.
+insert into alunos (codigo, nome, telefone, cidade)
+values (8, 'Julia', '8888-9999', 'São Paulo');
+
+--Selecione os dados da tabela a alunos e veja se ainda existem.
+select * from alunos;
+
+--Adicione 1 novo funcionário. Lembre-se que é 
+--necessário usar aspas para campos TEXTO. Campos numéricos 
+--não podem ter aspas. Se o salário tiver centavos, lembre-se 
+--que deve separar os centavos com um (.) (ponto) pois a vírgula
+-- é usada para separar os valores a serem inseridos.
+insert into funcionarios (codigo, nome, salario) 
+values (1, 'José', 1000);
+
+--Selecione os dados da tabela funcionários e veja se 
+--foi inserido corretamente.
+select * from funcionarios;
+
+--Cadastre 3 funcionários. Use código na sequência (1, 2, 3, 4, etc).
+insert into funcionarios (codigo, nome, salario) 
+values (2, 'Maria', 1300);
+insert into funcionarios (codigo, nome, salario) 
+values (3, 'Lia', 1300);
+insert into funcionarios (codigo, nome, salario) 
+values (4, 'Vinícius', 1200);
+
+--Selecione somente o código e nome dos funcionários. 
+select codigo, nome
+from funcionarios;
+
+--Selecione somente o nome e salário dos funcionários.
+select codigo, nome, salario
+from funcionarios;
+
+--Insira mais um funcionário.
+insert into funcionarios (codigo, nome, salario, telefone) 
+values (5, 'Marcos', 1200, '1122-3344');
+
+--Exiba todos os dados dos funcionários.
+select * from funcionarios;
+
+--Crie a tabela fornecedores contendo os campos nome, endereço,
+--telefone, cidade, estado, cep, cnpj e email.
+create table fornecedores (
+nome text,
+endereco text,
+telefone text,
+cidade text,
+estado text,
+cep text,
+cnpj text,
+email text);
+
+--Insira 2 fornecedores. 
+insert into fornecedores (nome, telefone, cidade, estado)
+values ('Malhas', '3132-3436', 'São Paulo', 'São Paulo');
+insert into fornecedores (nome, telefone, cidade, estado)
+values ('Linhas', '3738-3940', 'São Paulo', 'São Paulo');
+
+--Selecione o nome e o telefone dos fornecedores.
+select nome, telefone 
+from funcionarios;
+
+--Agora iremos aprender uma opção do comando select. 
+--Nós podemos restringir o que vai ser exibido na tela. É moleza. 
+--Por exemplo se eu quiser listar somente o aluno de código 2 o 
+--comando fica assim: select * from alunos where codigo = 2; - 
+--Nós apenas adicionamos o WHERE e a CONDIÇÃO. Veja que mantivemos o * 
+--para exibir todos os campos, mas poderíamos também exibir somente o 
+--nome do aluno 2 assim: select nome from alunos where codigo = 2; - 
+select * from alunos where codigo = 2;
+select nome from alunos where codigo = 2;
+
+--Selecione o funcionário de código 3.
+select * from funcionarios where codigo = 3;
+
+--Selecione o funcionário de código 1.
+select * from funcionarios where codigo = 1;
+
+--Selecione somente o nome e salário do funcionário de código 2.
+select nome, salario from funcionarios where codigo = 2;
+
+--Selecione somente o nome a cidade do aluno de código 1.
+select nome, cidade from alunos where codigo = 1;
+
+--Insira um funcionário para SP.
+insert into funcionarios (codigo, nome, telefone, cidade, estado)
+values (5, 'Vanessa', '1111-2222', 'São Paulo', 'SP');
+
+--Selecione todos os funcionários de SP.
+select * from funcionarios where estado = 'SP';
+
+--Crie a tabela livros contendo o campo código, nome, 
+--categoria, resumo, precocusto, precovenda.
+create table livros (
+codigo int,
+nome text,
+categoria text,
+resumo text,
+precocusto number,
+precovenda number);
+
+--Insira 1 livro.
+insert into livros (codigo, nome, categoria)
+values (1, 'Game of Thrones', 'Fantasia');
+
+
+--Selecione o nome e a categoria do livro de código 1.
+select nome, categoria from livros where codigo = 1;
+
+--Exclua a tabela livros.
+drop table livros;
+
+--Altere o nome da tabela aluno para estudantes.
+alter table alunos rename to estudantes;
+
+--Altere a tabela alunos inserindo o campo estado.
+alter table estudantes add estado text;

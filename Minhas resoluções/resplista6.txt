@@ -1,0 +1,79 @@
+--Selecione o nome e o estilo de todos os livros.
+select l.titulo, e.nome
+from livro l, estilo e
+where e.id = l.estilo_id;
+
+--Selecione o nome e a editora de todos os livros.
+select l.titulo, ed.nome
+from livro l, editora ed
+where ed.id = l.editora_id;
+
+-- Selecione o nome e o autor de todos os livros.
+select l.titulo, a.nome
+from livro l, autor a
+where a.id = l.autor_id;
+
+--Selecione o nome e o estilo de todos os livros que começam por “A”
+select l.titulo, e.nome
+from livro l, estilo e
+where e.id = l.estilo_id
+and l.titulo like 'a%';
+
+--Selecione o nome e o estilo de todos os livros que cujo estilo comece por “R”
+select l.titulo, e.nome
+from livro l, estilo e
+where e.id = l.estilo_id
+and e.nome like 'r%';
+
+--Selecione o nome do autor, da editora, do estilo e do livro de todos os livros 
+--de autores cujo nome comece por D. 
+select a.nome, ed.nome, e.nome, l.titulo
+from livro l, autor a, editora ed, estilo e
+where a.id = l.autor_id
+and ed.id = l.editora_id
+and e.id = l.estilo_id
+and a.nome like 'd%';
+
+--Selecione o nome do autor, da editora, do estilo e do livro 
+--de todos os livros de editoras paulistas. 
+select a.nome, ed.nome, e.nome, l.titulo, ed.estado
+from autor a, editora ed, estilo e, livro l
+where ed.id = l.editora_id
+and a.id = l.autor_id
+and e.id = l.estilo_id
+and ed.estado = 'RJ';
+
+--Atualize o autor do livro de id 1 para autor_id 2.
+update livro set autor_id = 2
+where id = 1;
+
+--Atualize o telefone da editora de id 3 para 44 6666-6666
+update editora set telefone = '44 6666-6666'
+where id = 3;
+
+--Atualize o nome do autor 8 para “Graciliano Ramos”
+update autor set nome = 'Graciliano Ramos'
+where id = 9;
+
+--Atualize o estilo 5 para Fantasia. 
+update estilo set nome = 'Fantasy'
+where id = 5;
+
+-- Selecione o nome do livro e do estilo de todas as editoras de SP.
+select l.titulo, e.nome, ed.nome, ed.estado
+from livro l, estilo e, editora ed
+where e.id = l.estilo_id
+and ed.id = l.editora_id
+and ed.estado = 'MG';
+
+--Selecione o nome do livro e da Editora de todas as editoras de SP
+select l.titulo, ed.nome
+from livro l, editora ed
+where ed.id = l.editora_id
+and ed.estado = 'SC';
+
+--Selecione o nome do livro e do autor de em ordem alfabética por autor
+select l.titulo, a.nome
+from livro l, autor a
+where a.id = l.autor_id
+order by a.nome;
